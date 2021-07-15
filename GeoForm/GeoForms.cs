@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace GeoForm
 {
+    /// <summary>
+    /// The GeoForms Class <c>BasisKlasse</c>
+    /// </summary>
     public class GeoForms
     {
         public Point Position;
         public Size Size;
         public Color Color;
+
+        public GeoForms() { }
 
         public GeoForms(Point Position, Size Size, Color Color)
         {
@@ -21,64 +21,63 @@ namespace GeoForm
         }
     }
 
+    /// <summary>
+    /// The CsRectangle Class <c>SubKlasse</c>
+    /// </summary>
+    /// <seealso cref="GeoForm.GeoForms" />
+    public class CsRectangle : GeoForms
+    {
 
-        //Aufgabe 1
-        /*public void Draw(Graphics e)
-        {
-            Pen pen = new Pen(Colour);
-            //e.
-
-        }*/
-
-
-
-        public class CsRectangle : GeoForms
+        public CsRectangle(Point Position, Size Size, Color Color) : base(Position, Size, Color)
         {
 
-            public CsRectangle(Point Position, Size Size, Color Color) : base(Position, Size, Color)
-            {
-
-            }
-            public void Draw( Graphics e)
-            {
-                Pen pen = new Pen(this.Color);
-                e.DrawRectangle(pen, new Rectangle(Position, Size));
-            }
         }
 
-        public class CsEllipse : GeoForms
+        public void Draw(Graphics e)
         {
-            public CsEllipse(Point Position, Size Size, Color Color) : base(Position, Size, Color)
-            {
-
-            }
-
-            public void Draw(Graphics e)
-            {
-                Pen pen = new Pen(this.Color);
-                e.DrawEllipse(pen, new Rectangle(Position, Size));
-            }
-        }
-
-        public class CsLine : GeoForms
-        {
-            public CsLine(Point Position, Size Size, Color Color) : base(Position, Size, Color)
-            {
-
-            }
-            public void Draw(Graphics e)
-            {
-            int pointNewX = Position.X + Size.Width;
-            int pointNewY = Position.Y + Size.Height;
-
-                Point Endpunkt = new Point(pointNewX, pointNewY);
-               
-                Pen pen = new Pen(this.Color);
-                e.DrawLine(pen, Position, Endpunkt);
-            }
-
-
-
+            Pen pen = new Pen(this.Color);
+            e.DrawRectangle(pen, new Rectangle(this.Position, this.Size));
         }
     }
 
+    /// <summary>
+    /// The CsEllipse Class.
+    /// </summary>
+    /// <seealso cref="GeoForm.GeoForms" />
+    public class CsEllipse : GeoForms
+    {
+        public CsEllipse(Point Position, Size Size, Color Color) : base(Position, Size, Color)
+        {
+
+        }
+
+        public void Draw(Graphics e)
+        {
+            Pen pen = new Pen(this.Color);
+            e.DrawEllipse(pen, new Rectangle(this.Position, this.Size));
+        }
+    }
+
+    /// <summary>
+    /// The CsLine Class.
+    /// </summary>
+    /// <seealso cref="GeoForm.GeoForms" />
+    public class CsLine : GeoForms
+    {
+        public CsLine(Point Position, Size Size, Color Color) : base(Position, Size, Color)
+        {
+
+        }
+
+        public void Draw(Graphics e)
+        {
+            int pointNewX = this.Position.X + this.Size.Width;
+            int pointNewY = this.Position.Y + this.Size.Height;
+
+            Point endpunkt = new Point(pointNewX, pointNewY);
+
+            Pen pen = new Pen(this.Color);
+            e.DrawLine(pen, this.Position, endpunkt);
+        }
+    }
+}
