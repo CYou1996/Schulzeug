@@ -1,4 +1,8 @@
-﻿using System.Drawing;
+﻿// <copyright file="GeoForms.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+using System.Drawing;
 
 namespace GeoForm
 {
@@ -7,18 +11,49 @@ namespace GeoForm
     /// </summary>
     public class GeoForms
     {
-        public Point Position;
-        public Size Size;
-        public Color Color;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GeoForms"/> class.
+        /// </summary>
         public GeoForms() { }
 
-        public GeoForms(Point Position, Size Size, Color Color)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GeoForms"/> class.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        /// <param name="color">The color.</param>
+        public GeoForms(int x, int y, int width, int height, Color color)
         {
-            this.Position = Position;
-            this.Size = Size;
-            this.Color = Color;
+            this.Position = new Point(x,y);
+            this.Size = new Size(width, height);
+            this.Color = color;
         }
+
+        /// <summary>
+        /// Gets or sets the position.
+        /// </summary>
+        /// <value>
+        /// The position.
+        /// </value>
+        public Point Position { get; set; }
+
+        /// <summary>
+        /// Gets or sets the size.
+        /// </summary>
+        /// <value>
+        /// The size.
+        /// </value>
+        public Size Size { get; set; }
+
+        /// <summary>
+        /// Gets or sets the color.
+        /// </summary>
+        /// <value>
+        /// The color.
+        /// </value>
+        public Color Color { get; set; }
     }
 
     /// <summary>
@@ -27,16 +62,48 @@ namespace GeoForm
     /// <seealso cref="GeoForm.GeoForms" />
     public class CsRectangle : GeoForms
     {
-
-        public CsRectangle(Point Position, Size Size, Color Color) : base(Position, Size, Color)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CsRectangle"/> class.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        /// <param name="color">The color.</param>
+        public CsRectangle(int x, int y, int width, int height, Color color)
+            : base(x, y, width, height, color)
         {
+            // Aufgabe [6].
+            if (width < 0)
+            {
 
+                width = -width;
+
+
+                if (x < 0)
+                {
+                    x = -x;
+                }
+
+            }
+            if (height < 0) {
+                height = -height;
+
+                if (y < 0)
+                {
+                    y = -y;
+                }
+            }
         }
 
-        public void Draw(Graphics e)
+        /// <summary>
+        /// Draws the specified g.
+        /// </summary>
+        /// <param name="g">The g.</param>
+        public void Draw(Graphics g)
         {
             Pen pen = new Pen(this.Color);
-            e.DrawRectangle(pen, new Rectangle(this.Position, this.Size));
+            g.DrawRectangle(pen, new Rectangle(this.Position, this.Size));
         }
     }
 
@@ -46,10 +113,16 @@ namespace GeoForm
     /// <seealso cref="GeoForm.GeoForms" />
     public class CsEllipse : GeoForms
     {
-        public CsEllipse(Point Position, Size Size, Color Color) : base(Position, Size, Color)
-        {
-
-        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CsEllipse"/> class.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        /// <param name="color">The color.</param>
+        public CsEllipse(int x, int y, int width, int height, Color color)
+            : base(x, y, width, height, color) { }
 
         public void Draw(Graphics e)
         {
@@ -64,10 +137,16 @@ namespace GeoForm
     /// <seealso cref="GeoForm.GeoForms" />
     public class CsLine : GeoForms
     {
-        public CsLine(Point Position, Size Size, Color Color) : base(Position, Size, Color)
-        {
-
-        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CsLine"/> class.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        /// <param name="color">The color.</param>
+        public CsLine(int x, int y, int width, int height, Color color)
+            : base(x, y, width, height, color) { }
 
         public void Draw(Graphics e)
         {
